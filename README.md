@@ -4,8 +4,8 @@ Adds support for transcribing audio files (.wav, .mp3) using [faster-whisper](ht
 ## Installation
 
 ```bash
-pip install git+https://github.com/waikato-datamining/audio-dataset-converter.git
-pip install git+https://github.com/waikato-datamining/audio-dataset-converter-faster-whisper.git
+pip install git+https://github.com/waikato-llm/audio-dataset-converter.git
+pip install git+https://github.com/waikato-llm/audio-dataset-converter-faster-whisper.git
 ```
 
 ## Plugins
