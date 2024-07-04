@@ -38,6 +38,9 @@ setup(
     author='Peter Reutemann',
     author_email='fracpete@waikato.ac.nz',
     entry_points={
+        "console_scripts": [
+            "adc-srt=adc_faster_whisper.tool.srt:sys_main",
+        ],
         "class_lister": [
             "adc_faster_whisper=adc_faster_whisper.class_lister",
         ],
