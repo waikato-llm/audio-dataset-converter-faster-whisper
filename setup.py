@@ -13,7 +13,7 @@ def _read(f):
 
 
 setup(
-    name="audio-dataset-converter-faster-whisper",
+    name="audio_dataset_converter_faster_whisper",
     description="Python3 library that adds audio transcription support (.wav, .mp3) to the audio-dataset-converter library.",
     long_description=(
             _read('DESCRIPTION.rst') + b'\n' +
@@ -31,7 +31,7 @@ setup(
     },
     packages=find_namespace_packages(where='src'),
     install_requires=[
-        "audio-dataset-converter>=0.0.1",
+        "audio_dataset_converter>=0.0.1",
         "faster-whisper",
     ],
     version="0.0.1",
