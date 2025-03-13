@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - switched to underscores in project name
+- added support for placeholders: `adc-srt`
 
 
 0.0.1 (2024-07-05)

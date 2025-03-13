@@ -8,6 +8,7 @@ from datetime import timedelta
 
 from wai.logging import init_logging, set_logging_level, add_logging_level
 from seppl.io import locate_files
+from seppl.placeholders import load_user_defined_placeholders, placeholder_list, expand_placeholders
 from adc.core import ENV_ADC_LOGLEVEL
 from faster_whisper import WhisperModel
 
@@ -65,7 +66,7 @@ def generate_subtitles(paths: List[str], output: str = None, model_size: str = "
         if output is None:
             path_srt = os.path.splitext(path)[0] + ".srt"
         else:
-            path_srt = os.path.join(output, os.path.splitext(os.path.basename(path))[0] + ".srt")
+            path_srt = os.path.join(expand_placeholders(output), os.path.splitext(os.path.basename(path))[0] + ".srt")
         lines = []
         count = 0
         segments, info = model.transcribe(path, beam_size=beam_size)
@@ -101,16 +102,23 @@ def main(args=None):
         description="Tool for generating SRT subtitle files from video/audio files.",
         prog=SRT,
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("-i", "--input", metavar="FILE", help="The audio/video files to process; supports glob syntax.", default=None, type=str, required=True, nargs="+")
-    parser.add_argument("-o", "--output", metavar="DIR", help="The directory to store the generated subtitle files in; places them in the same locations as the input files if not provided.", type=str, required=False, default=None)
+    parser.add_argument("-i", "--input", metavar="FILE", help="The audio/video files to process; supports glob syntax. " + placeholder_list(input_based=False), default=None, type=str, required=True, nargs="+")
+    parser.add_argument("-o", "--output", metavar="DIR", help="The directory to store the generated subtitle files in; places them in the same locations as the input files if not provided. " + placeholder_list(input_based=False), type=str, required=False, default=None)
     parser.add_argument("-m", "--model_size", type=str, help="The size of the whisper model to use, e.g., 'base' or 'large-v3'", required=False, default="base")
     parser.add_argument("-d", "--device", type=str, help="The device to run on, e.g., 'cuda' or 'cpu'", required=False, default="cpu")
     parser.add_argument("-c", "--compute_type", type=str, help="The compute type to use, e.g., 'float16' or 'int8'", required=False, default="int8")
     parser.add_argument("-b", "--beam_size", type=int, help="The beam size to use for decoding", required=False, default=5)
     parser.add_argument("-u", "--update_interval", type=int, help="The number of segments when to output info logging messages during processing", required=False, default=100)
+    parser.add_argument("--placeholders", metavar="FILE", help="The file with custom placeholders to load (format: key=value).", required=False, default=None, type=str)
     add_logging_level(parser)
     parsed = parser.parse_args(args=args)
     set_logging_level(_logger, parsed.logging_level)
+    if parsed.placeholders is not None:
+        if not os.path.exists(parsed.placeholders):
+            _logger.error("Placeholder file not found: %s" % parsed.placeholders)
+        else:
+            _logger.info("Loading custom placeholders from: %s" % parsed.placeholders)
+            load_user_defined_placeholders(parsed.placeholders)
     generate_subtitles(parsed.input, output=parsed.output, model_size=parsed.model_size, device=parsed.device,
                        compute_type=parsed.compute_type, beam_size=parsed.beam_size)
 
