@@ -34,7 +34,7 @@ setup(
         "audio_dataset_converter>=0.0.1",
         "faster_whisper",
     ],
-    version="0.0.2",
+    version="0.0.3",
     author='Peter Reutemann',
     author_email='fracpete@waikato.ac.nz',
     entry_points={
