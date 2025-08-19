@@ -4,7 +4,8 @@ from typing import List
 from faster_whisper import WhisperModel
 from seppl.io import Filter
 from wai.logging import LOGGING_WARNING
-from adc.api import SpeechData, flatten_list, make_list
+from kasperl.api import flatten_list, make_list
+from adc.api import SpeechData
 
 
 class FasterWhisperTranscribe(Filter):
