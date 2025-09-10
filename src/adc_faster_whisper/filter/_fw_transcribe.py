@@ -2,13 +2,13 @@ import argparse
 from typing import List
 
 from faster_whisper import WhisperModel
-from seppl.io import Filter
+from seppl.io import BatchFilter
 from wai.logging import LOGGING_WARNING
 from kasperl.api import flatten_list, make_list
 from adc.api import SpeechData
 
 
-class FasterWhisperTranscribe(Filter):
+class FasterWhisperTranscribe(BatchFilter):
     """
     Generates transcriptions for the audio files passing through.
     """
