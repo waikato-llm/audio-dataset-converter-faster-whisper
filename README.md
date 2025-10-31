@@ -3,8 +3,15 @@ Adds support for transcribing audio files (.wav, .mp3) using [faster-whisper](ht
 
 ## Installation
 
+Via PyPI:
+
 ```bash
-pip install git+https://github.com/waikato-llm/audio-dataset-converter.git
+pip install audio_dataset_converter_faster_whisper
+```
+
+The latest code straight from the repository:
+
+```bash
 pip install git+https://github.com/waikato-llm/audio-dataset-converter-faster-whisper.git
 ```
 
