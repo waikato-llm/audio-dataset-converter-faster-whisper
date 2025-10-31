@@ -3,7 +3,7 @@ PyPi
 
 Preparation:
 
-* update all help files (`llm-help -f markdown -o plugins -l INFO -i README.md -t "audio-dataset-converter-faster-whisper plugins"`)
+* update all help files (`adc-help -f markdown -o plugins -l INFO -i README.md -t "audio-dataset-converter-faster-whisper plugins"`)
 * increment version in `setup.py`
 * add new changelog section in `CHANGES.rst`
 * align `DESCRIPTION.rst` with `README.md`  
@@ -27,7 +27,7 @@ Steps:
 
 * start new release (version: `vX.Y.Z`)
 * enter release notes, i.e., significant changes since last release
-* upload `audio-dataset-converter-faster-whisper-X.Y.Z.tar.gz` previously generated with `setup.py`
+* upload `audio_dataset_converter_faster_whisper-X.Y.Z.tar.gz` previously generated with `setup.py`
 * publish
 
 
